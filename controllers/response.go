@@ -14,11 +14,20 @@ type Responder interface {
 // jsonResponse holds our json payload for marshalling
 type jsonResponse struct {
 	statusCode int
-	Message    string `json:"Message"`
+	Data       interface{} `json:"Data,omitempty"`
+	Message    string      `json:"Message,omitempty"`
 }
 
-// NewJsonResponse is a constructor for a json Response
-func NewJSONResponse(statusCode int, message string) jsonResponse {
+// NewJSONErrorResponse is a constructor for an error json Response
+func NewJSONSuccessResponse(statusCode int, data interface{}) jsonResponse {
+	return jsonResponse{
+		statusCode: statusCode,
+		Data:       data,
+	}
+}
+
+// NewJSONErrorResponse is a constructor for an error json Response
+func NewJSONErrorResponse(statusCode int, message string) jsonResponse {
 	return jsonResponse{
 		statusCode: statusCode,
 		Message:    message,

@@ -54,6 +54,7 @@ func main() {
 	r.Mount("/api", apiRouter)
 
 	apiRouter.Get("/get-series", controllers.GetSeriesHandler)
+	apiRouter.Get("/get-episodes", controllers.GetEpisodesHandler)
 
 	log.Printf("Serving files from %s on port: %s\n", filepathRoot, port)
 	http.ListenAndServe(":"+port, r)
